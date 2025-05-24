@@ -24,10 +24,9 @@ jobs:
       - name: Trazer branches
         run: |
           git fetch origin dev
-          git fetch origin ${{ github.head_ref }}
 
-      - name: Fazer merge e push
+      - name: Fazer merge e push para dev
         run: |
           git checkout dev
-          git merge --no-ff origin/${{ github.head_ref }} -m "chore: auto-merge ${{ github.head_ref }} → dev"
+          git merge --no-ff ${{ github.ref_name }} -m "chore: auto-merge ${{ github.ref_name }} → dev"
           git push origin dev
