@@ -1,4 +1,4 @@
-name: Auto-merge Feature → Dev
+name: Auto-merge Feature → Demo
 
 on:
   push:
@@ -12,7 +12,7 @@ permissions:
 
 
 jobs:
-  merge-into-dev:
+  merge-into-demo:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,17 +29,15 @@ jobs:
           git config user.email "actions@github.com"
           git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
 
-
       - name: Trazer branches
         run: |
-          git fetch origin dev
+          git fetch origin demo
 
-
-      - name: Fazer merge e push para dev
+      - name: Fazer merge e push para demo
         run: |
-          git checkout dev
+          git checkout demo
           set +e
-          git merge --no-ff ${{ github.ref_name }} -m "chore: auto-merge ${{ github.ref_name }} → dev"
+          git merge --no-ff ${{ github.ref_name }} -m "chore: auto-merge ${{ github.ref_name }} → demo"
           status=$?
           set -e
           if [ $status -ne 0 ]; then
@@ -47,6 +45,4 @@ jobs:
             git merge --abort
             exit 1
           fi
-          git push origin dev
-
-
+          git push origin demo
