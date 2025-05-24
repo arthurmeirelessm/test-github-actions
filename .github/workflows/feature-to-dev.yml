@@ -1,0 +1,33 @@
+name: Auto-merge Feature → Dev
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+
+jobs:
+  merge-into-dev:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout completo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+      - name: Trazer branches
+        run: |
+          git fetch origin dev
+          git fetch origin ${{ github.head_ref }}
+
+      - name: Fazer merge e push
+        run: |
+          git checkout dev
+          git merge --no-ff origin/${{ github.head_ref }} -m "chore: auto-merge ${{ github.head_ref }} → dev"
+          git push origin dev
