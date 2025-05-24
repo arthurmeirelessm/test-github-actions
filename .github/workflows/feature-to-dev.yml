@@ -11,7 +11,6 @@ permissions:
   pull-requests: write
 
 
-
 jobs:
   merge-into-dev:
     runs-on: ubuntu-latest
