@@ -2,8 +2,9 @@ name: Auto-merge Feature → Dev
 
 on:
   push:
-    branches:
-      - 'feature/**'
+    - 'feature/**'
+    - 'fix/**'
+
 
 
 permissions:
