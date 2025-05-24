@@ -36,5 +36,7 @@ jobs:
             echo "❌ Merge conflict detected. Please resolve manually."
             git merge --abort
             exit 1
+          fi
           git push origin dev
+
 
