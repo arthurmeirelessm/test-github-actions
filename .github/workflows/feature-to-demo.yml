@@ -10,7 +10,6 @@ permissions:
   contents: write
   workflows: write
 
-
 jobs:
   merge-into-demo:
     runs-on: ubuntu-latest
