@@ -1,16 +1,25 @@
+name: Auto-merge Feature → Demo
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+
+
+permissions:
+  contents: write
+  pull-requests: write
+
+
 jobs:
   merge-into-demo:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      workflows: write
 
     steps:
       - name: Checkout completo
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          token: ${{ secrets.GH_TOKEN }}
 
       - name: Setup Git
         run: |

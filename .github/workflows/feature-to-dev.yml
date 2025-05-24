@@ -1,16 +1,26 @@
+name: Auto-merge Feature → Dev
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+
+
+permissions:
+  contents: write
+  pull-requests: write
+
+
+
 jobs:
   merge-into-dev:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      workflows: write
 
     steps:
       - name: Checkout completo
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          token: ${{ secrets.GH_TOKEN }}
 
       - name: Setup Git
         run: |
@@ -35,3 +45,5 @@ jobs:
             exit 1
           fi
           git push origin dev
+
+
