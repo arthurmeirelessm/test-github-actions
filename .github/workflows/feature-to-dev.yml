@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Configurar Git
+      - name: Setup Git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "actions@github.com"
@@ -24,11 +24,10 @@ jobs:
       - name: Trazer branches
         run: |
           git fetch origin dev
-          git fetch origin ${{ github.ref_name }}
+          git fetch origin ${{ github.head_ref }}
 
       - name: Fazer merge e push
         run: |
           git checkout dev
-          git merge --no-ff origin/${{ github.ref_name }} \
-            -m "chore: auto-merge ${{ github.ref_name }} → dev"
+          git merge --no-ff origin/${{ github.head_ref }} -m "chore: auto-merge ${{ github.head_ref }} → dev"
           git push origin dev
