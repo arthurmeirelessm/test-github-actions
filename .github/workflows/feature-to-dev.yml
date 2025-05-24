@@ -5,6 +5,13 @@ on:
     branches:
       - 'feature/**'
 
+
+permissions:
+  contents: write
+  pull-requests: write
+
+
+
 jobs:
   merge-into-dev:
     runs-on: ubuntu-latest
